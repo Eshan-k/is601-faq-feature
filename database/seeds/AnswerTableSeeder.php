@@ -9,8 +9,7 @@ class AnswerTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
 	    $users = App\User::inRandomOrder();
 	    $users->each(function ($user) {
 		    $question = App\Question::inRandomOrder()->first();
