@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Answer;
+use App\Question;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
