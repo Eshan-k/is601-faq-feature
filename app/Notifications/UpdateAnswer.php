@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class Update_Answer extends Notification
+class UpdateAnswer extends Notification
 {
     use Queueable;
 
@@ -41,8 +41,8 @@ class Update_Answer extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->line('Your Answer got updated.')
+                    //->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 

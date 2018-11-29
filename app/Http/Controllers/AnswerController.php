@@ -6,8 +6,8 @@
 	use App\Question;
 	use Illuminate\Support\Facades\Auth;
 	
-	use App\Notifications\New_Answer;
-	use App\Notifications\Update_Answer;
+	use App\Notifications\GotAnswer;
+	use App\Notifications\UpdateAnswer;
 	
 	use Illuminate\Http\Request;
 	
@@ -57,7 +57,7 @@
 			$Answer->user()->associate(Auth::user());
 			$Answer->question()->associate($question);
 			$Answer->save();
-			Auth::user()->notify(new New_Answer());
+			Auth::user()->notify(new Got_Answer());
 			return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
 		}
 		
