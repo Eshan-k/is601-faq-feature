@@ -6,6 +6,9 @@
 	use App\Question;
 	use Illuminate\Support\Facades\Auth;
 	
+	use App\Notifications\New_Answer;
+	use App\Notifications\Update_Answer;
+	
 	use Illuminate\Http\Request;
 	
 	class AnswerController extends Controller
@@ -54,7 +57,7 @@
 			$Answer->user()->associate(Auth::user());
 			$Answer->question()->associate($question);
 			$Answer->save();
-			
+			Auth::user()->notify(new New_Answer());
 			return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
 		}
 		
@@ -67,7 +70,6 @@
 		public function show($question,  $answer)
 		{
 			$answer = Answer::find($answer);
-			
 			return view('answer')->with(['answer' => $answer, 'question' => $question]);
 		}
 		
@@ -105,7 +107,7 @@
 			$answer = Answer::find($answer);
 			$answer->body = $request->body;
 			$answer->save();
-			
+			Auth::user()->notify(new Update_Answer());
 			return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
 			
 		}
@@ -119,7 +121,6 @@
 		public function destroy($question, $answer)
 		{
 			$answer = Answer::find($answer);
-			
 			$answer->delete();
 			return redirect()->route('questions.show',['question_id' => $question])->with('message', 'Delete');
 			

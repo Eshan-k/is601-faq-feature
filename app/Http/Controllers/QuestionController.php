@@ -79,8 +79,12 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-	    $edit = TRUE;
-	    return view('questionForm', ['question' => $question, 'edit' => $edit ]);
+    	if(Auth::user()->id == $question->user_id) {
+		    $edit = TRUE;
+		    return view('questionForm', ['question' => $question, 'edit' => $edit ]);
+	    }
+	    //$edit = TRUE;
+	    //return view('questionForm', ['question' => $question, 'edit' => $edit ]);
     }
 
     /**
