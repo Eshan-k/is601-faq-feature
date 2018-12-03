@@ -57,7 +57,7 @@
 			$Answer->user()->associate(Auth::user());
 			$Answer->question()->associate($question);
 			$Answer->save();
-			Auth::user()->notify(new Got_Answer());
+			Auth::user()->notify(new GotAnswer());
 			return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
 		}
 		
@@ -107,7 +107,7 @@
 			$answer = Answer::find($answer);
 			$answer->body = $request->body;
 			$answer->save();
-			Auth::user()->notify(new Update_Answer());
+			Auth::user()->notify(new UpdateAnswer());
 			return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
 			
 		}
