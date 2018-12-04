@@ -3,7 +3,9 @@
 	namespace App\Http\Controllers;
 	
 	use App\Answer;
+	use App\Notifications\NewAnswer;
 	use App\Question;
+	use App\User;
 	use Illuminate\Support\Facades\Auth;
 	
 	use App\Notifications\GotAnswer;
@@ -45,22 +47,23 @@
 			
 			$input = $request->validate(
 				[
-                    'body' => 'required|min:5',
-                ],
+					'body' => 'required|min:5',
+				],
 				[
 					'body.required' => 'Body is required',
-                    'body.min' => 'Body must be at least 5 characters',
-                ]);
+					'body.min' => 'Body must be at least 5 characters',
+				]);
 			$input = request()->all();
 			$question = Question::find($question);
 			$Answer = new Answer($input);
 			$Answer->user()->associate(Auth::user());
 			$Answer->question()->associate($question);
 			$Answer->save();
-			//Auth::user()->notify(new GotAnswer());
+			$myUser = User::find($question->id);
+			$myUser->notify(new NewAnswer());
 			return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
 		}
-		 
+		
 		/**
 		 * Display the specified resource.
 		 *
@@ -97,17 +100,19 @@
 		{
 			$input = $request->validate(
 				[
-                    'body' => 'required|min:5',
-                ],
+					'body' => 'required|min:5',
+				],
 				[
 					'body.required' => 'Body is required',
-                    'body.min' => 'Body must be at least 5 characters',
+					'body.min' => 'Body must be at least 5 characters',
 				]);
 			
 			$answer = Answer::find($answer);
 			$answer->body = $request->body;
+			
 			$answer->save();
-			//Auth::user()->notify(new UpdateAnswer());
+			$myUser = User::find($question);
+			$myUser->notify(new UpdateAnswer());
 			return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
 			
 		}
