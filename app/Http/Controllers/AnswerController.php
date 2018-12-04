@@ -60,7 +60,7 @@
 			//Auth::user()->notify(new GotAnswer());
 			return redirect()->route('questions.show',['question_id' => $question->id])->with('message', 'Saved');
 		}
-		
+		 
 		/**
 		 * Display the specified resource.
 		 *
