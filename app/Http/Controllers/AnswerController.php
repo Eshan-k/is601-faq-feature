@@ -8,7 +8,6 @@
 	use App\User;
 	use Illuminate\Support\Facades\Auth;
 	
-	use App\Notifications\GotAnswer;
 	use App\Notifications\UpdateAnswer;
 	
 	use Illuminate\Http\Request;
