@@ -2,10 +2,20 @@
 
 namespace App\Notifications;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+
+use App\Question;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Answer;
+
+use Illuminate\Http\Request;
+
+
 
 class UpdateAnswer extends Notification
 {
@@ -18,7 +28,7 @@ class UpdateAnswer extends Notification
      */
     public function __construct()
     {
-        //
+        //dd(Request::capture());
     }
 
     /**
@@ -40,10 +50,15 @@ class UpdateAnswer extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+    	//dd($notifiable);
+	    $request = Request::capture();
+	    //dd($request);
+	    $path = $request->path();
+	    $string_path = explode("/", $path);
+	    return (new MailMessage)
+		    ->line('Someone answered your Question.')
+		    ->action('Notification', \route('questions.show', $string_path[1]))
+		    ->line('Thank you for using our application!');
     }
 
     /**
