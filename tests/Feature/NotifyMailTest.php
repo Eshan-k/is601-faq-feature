@@ -41,7 +41,7 @@ class NotifyMailTest extends TestCase
 	    // mail is sent to user
 	    Mail::to($user->email)->send(new Mailable());
 	
-	    // Mail::assertSent(NotifyMail::class, function (NotifyMail $mail) {});
+	    // Mail::assertSent(TestMail::class, function (TestMail $mail) {});
 	    Mail::assertSent(Mailable::class);
 	    
     }

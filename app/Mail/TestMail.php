@@ -4,7 +4,7 @@
 	use Illuminate\Mail\Mailable;
 	
 	
-	class NotifyMail extends Mailable
+	class TestMail extends Mailable
 	{
 		
 		/**
@@ -19,7 +19,7 @@
 				->to('client@mail.com')
 				->replyTo('replyto@mail.com')
 				->cc('cc@mail.com')
-				->bcc('bcc@mail.com');
-				
+				->bcc('bcc@mail.com')
+				->subject('test mailable');
 		}
 	}

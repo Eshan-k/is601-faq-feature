@@ -13,7 +13,7 @@ use App\Answer;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 
-use App\Mail\NotifyMail;
+use App\Mail\TestMail;
 
 class MailTest extends TestCase
 {
@@ -24,31 +24,31 @@ class MailTest extends TestCase
      */
 	
 	public function testFrom() {
-		$mail_test = new NotifyMail();
+		$mail_test = new TestMail();
 		$mail_test->from('sender@mail.com');
 		$this->assertTrue($mail_test->hasFrom('sender@mail.com'));
 	}
 	
 	public function testTo() {
-		$mail_test = new NotifyMail();
+		$mail_test = new TestMail();
 		$mail_test->to('client@mail.com');
 		$this->assertTrue($mail_test->hasTo('client@mail.com'));
 	}
 	
 	public function testCc() {
-		$mail_test = new NotifyMail();
+		$mail_test = new TestMail();
 		$mail_test->cc('cc@mail.com');
 		$this->assertTrue($mail_test->hasCc('cc@mail.com'));
 	}
 	
 	public function testBcc() {
-		$mail_test = new NotifyMail();
+		$mail_test = new TestMail();
 		$mail_test->bcc('bcc@mail.com');
 		$this->assertTrue($mail_test->hasBcc('bcc@mail.com'));
 	}
 	
 	public function testReplyTo() {
-		$mail_test = new NotifyMail();
+		$mail_test = new TestMail();
 		$mail_test->replyTo('replyto@mail.com');
 		$this->assertTrue($mail_test->hasReplyTo('replyto@mail.com'));
 	}
