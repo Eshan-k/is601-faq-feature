@@ -57,7 +57,7 @@ class UpdateAnswer extends Notification
 	    $string_path = explode("/", $path);
 	    return (new MailMessage)
 		    ->line('Someone answered your Question.')
-		    ->action('Notification', \route('questions.show', $string_path[1]))
+		    ->action('See Answer', \route('questions.show', $string_path[1]))
 		    ->line('Thank you for using our application!');
     }
 
