@@ -12,7 +12,7 @@ use App\Answer;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 
-class MailTest extends TestCase
+class NotifyMailTest extends TestCase
 {
     /**
      * A basic test example.
@@ -38,11 +38,12 @@ class MailTest extends TestCase
 	    $answer->question()->associate($question);
 	    $this->assertTrue($answer->save());
 	
-	
 	    // mail is sent to user
 	    Mail::to($user->email)->send(new Mailable());
 	
 	    // Mail::assertSent(NotifyMail::class, function (NotifyMail $mail) {});
 	    Mail::assertSent(Mailable::class);
+	    
     }
+    
 }
